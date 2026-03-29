@@ -174,8 +174,8 @@ export function ItineraryView({ data: initialData }: ItineraryViewProps) {
   const titleClass = fontSizeScale > 1 ? 'text-4xl' : 'text-2xl';
 
   return (
-    <div className="w-full h-full pt-24 pb-12 px-6 flex flex-col max-w-6xl mx-auto overflow-y-auto" style={{ fontSize: `${fontSizeScale}em` }}>
-      <div className="flex justify-between items-center mb-8">
+    <div className="w-full h-full pt-20 md:pt-24 pb-12 px-4 md:px-6 flex flex-col max-w-6xl mx-auto overflow-y-auto" style={{ fontSize: `${fontSizeScale}em` }}>
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6 md:mb-8">
         <div>
           <h2 className={`font-light text-white/90 tracking-tight ${titleClass}`}>
             {data.destination} 行程规划
@@ -197,12 +197,12 @@ export function ItineraryView({ data: initialData }: ItineraryViewProps) {
       </div>
 
       {/* 方案切换 Tabs */}
-      <div className="flex gap-4 mb-8 overflow-visible pb-4">
+      <div className="flex gap-3 md:gap-4 mb-6 md:mb-8 overflow-x-auto pb-4 scrollbar-hide px-1">
         {data.plans.map((plan, index) => (
           <button
             key={plan.id}
             onClick={() => setActivePlanId(plan.id)}
-            className={`flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-2xl border-2 transition-all font-bold text-2xl shadow-lg ${
+            className={`flex-shrink-0 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-2xl border-2 transition-all font-bold text-xl md:text-2xl shadow-lg ${
               activePlanId === plan.id
                 ? 'bg-blue-600/50 border-blue-400 text-white shadow-blue-500/30 scale-110'
                 : 'bg-white/10 border-white/20 text-white/70 hover:bg-white/20 hover:text-white hover:border-white/40'
@@ -213,10 +213,10 @@ export function ItineraryView({ data: initialData }: ItineraryViewProps) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         {/* 左侧：方案概览 */}
-        <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl">
+        <div className="lg:col-span-1 space-y-4 md:space-y-6">
+          <div className="bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl p-4 md:p-6 backdrop-blur-xl">
             <h3 className={`font-medium text-white mb-4 ${headingClass}`}>{activePlan.name}</h3>
             
             <div className="flex flex-wrap gap-2 mb-6">
@@ -250,36 +250,52 @@ export function ItineraryView({ data: initialData }: ItineraryViewProps) {
           </div>
 
           {/* 操作按钮区 */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3 md:gap-4">
             <button 
               onClick={() => setShowRouteMap(true)}
-              className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-white transition-colors"
+              className="flex items-center justify-center gap-2 px-3 md:px-6 py-3 md:py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl md:rounded-2xl font-medium transition-all"
             >
-              <Map size={18} /> 路线预览
+              <Map size={18} />
+              <span className="text-sm md:text-base">路线预览</span>
             </button>
-            <button 
+            
+            <button
               onClick={handleNavigation}
-              className="flex items-center justify-center gap-2 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-white transition-colors"
+              className="flex items-center justify-center gap-2 px-3 md:px-6 py-3 md:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl md:rounded-2xl font-medium transition-all shadow-lg shadow-blue-600/20 group"
             >
-              <Navigation size={18} /> 一键导航
+              <Navigation size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <span className="text-sm md:text-base">一键导航</span>
             </button>
-            <button 
+
+            <button
               onClick={handleSave}
-              className={`flex items-center justify-center gap-2 py-3 rounded-xl text-white transition-colors ${
-                isSaved ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30' : 'bg-white/10 hover:bg-white/20'
+              className={`flex items-center justify-center gap-2 px-3 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl font-medium transition-all ${
+                isSaved 
+                  ? 'bg-pink-500/20 text-pink-400 border border-pink-500/30' 
+                  : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
             >
-              <Heart size={18} className={isSaved ? "fill-current" : ""} /> 
-              {isSaved ? '已收藏' : '收藏行程'}
+              <Heart size={18} className={isSaved ? 'fill-current' : ''} />
+              <span className="text-sm md:text-base">{isSaved ? '已收藏' : '收藏此方案'}</span>
             </button>
-            <button 
+
+            <button
               onClick={handleEditToggle}
-              className={`flex items-center justify-center gap-2 py-3 rounded-xl text-white transition-colors ${
-                isEditing ? 'bg-blue-600 hover:bg-blue-500' : 'bg-white/10 hover:bg-white/20'
+              className={`flex items-center justify-center gap-2 px-3 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl font-medium transition-all ${
+                isEditing ? 'bg-blue-600 hover:bg-blue-500 text-white' : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
             >
-              {isEditing ? <X size={18} /> : <Edit2 size={18} />}
-              {isEditing ? '取消修改' : '调整修改'}
+              {isEditing ? (
+                <>
+                  <X size={18} />
+                  <span className="text-sm md:text-base">取消修改</span>
+                </>
+              ) : (
+                <>
+                  <Edit2 size={18} />
+                  <span className="text-sm md:text-base">调整修改</span>
+                </>
+              )}
             </button>
           </div>
 

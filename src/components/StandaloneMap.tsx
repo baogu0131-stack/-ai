@@ -177,47 +177,52 @@ export function StandaloneMap({ initialQuery }: StandaloneMapProps) {
   };
 
   return (
-    <div className="w-full h-full pt-24 pb-12 px-6 flex flex-col max-w-6xl mx-auto">
-      <h2 className="text-3xl font-light mb-8 text-white/90 tracking-tight">地图探索</h2>
+    <div className="w-full h-full pt-20 md:pt-24 pb-12 px-4 md:px-6 flex flex-col max-w-6xl mx-auto">
+      <h2 className="text-2xl md:text-3xl font-light mb-6 md:mb-8 text-white/90 tracking-tight">地图探索</h2>
       
-      <form onSubmit={handleSearch} className="mb-6 flex items-center bg-white/5 backdrop-blur-xl border border-white/10 rounded-full p-2 shadow-2xl max-w-md">
-        <Search size={18} className="text-white/30 ml-3 mr-2 shrink-0" />
-        <input
-          type="text"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          placeholder="搜索地点、餐厅或路线..."
-          className="w-full bg-transparent text-white placeholder-white/30 focus:outline-none text-base px-2"
-        />
-        <button
-          type="submit"
-          disabled={!keyword.trim()}
-          className="ml-2 px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full disabled:opacity-30 transition-colors text-sm font-medium"
-        >
-          搜索
-        </button>
-      </form>
-
-      <div className="flex-1 flex flex-col md:flex-row relative bg-black/40 backdrop-blur-md rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
-        {error ? (
-          <div className="flex-1 flex items-center justify-center p-8 text-center text-red-400">
-            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 max-w-md">
-              <p className="mb-4">{error}</p>
-              <p className="text-sm text-white/60">
-                请在 AI Studio 的设置 (Settings) 中添加环境变量 <code>VITE_AMAP_KEY</code> 和 <code>VITE_AMAP_SECURITY_CODE</code>。
-              </p>
+      <div className="flex-1 bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl overflow-hidden backdrop-blur-sm flex flex-col md:flex-row relative">
+        {/* Map Area */}
+        <div className="flex-1 relative min-h-[300px] md:min-h-0">
+          <div ref={mapContainerRef} className="absolute inset-0" />
+          
+          {/* Error Overlay */}
+          {error && (
+            <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+              <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 md:p-6 rounded-xl md:rounded-2xl max-w-md text-center shadow-2xl">
+                <p className="font-medium mb-2 text-sm md:text-base">{error}</p>
+                <p className="text-xs md:text-sm text-red-400/80">请在 AI Studio 的设置 (Settings) 中添加环境变量 VITE_AMAP_KEY 和 VITE_AMAP_SECURITY_CODE。</p>
+              </div>
             </div>
+          )}
+        </div>
+
+        {/* Search Panel Overlay - Mobile Bottom / Desktop Right */}
+        <div className="w-full md:w-[360px] bg-[#1a1a1a]/95 backdrop-blur-xl border-t md:border-t-0 md:border-l border-white/10 flex flex-col max-h-[50vh] md:max-h-none z-10 shrink-0">
+          <div className="p-4 md:p-6 shrink-0">
+            <form onSubmit={handleSearch} className="flex items-center bg-white/10 rounded-xl md:rounded-2xl p-2 md:p-3 border border-white/5 focus-within:border-blue-500/50 transition-colors">
+              <Search size={18} className="text-white/40 ml-2 mr-3 shrink-0" />
+              <input
+                type="text"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                placeholder="搜索地点、餐厅或路线..."
+                className="w-full bg-transparent text-white placeholder-white/40 focus:outline-none text-sm md:text-base"
+              />
+              <button
+                type="submit"
+                className="ml-2 px-3 md:px-4 py-1.5 md:py-2 bg-white/10 hover:bg-white/20 rounded-lg md:rounded-xl text-white text-xs md:text-sm font-medium transition-colors whitespace-nowrap"
+              >
+                搜索
+              </button>
+            </form>
           </div>
-        ) : (
-          <>
-            <div ref={mapContainerRef} className="flex-1 w-full h-full min-h-[400px]" />
-            <div 
-              ref={panelRef} 
-              className="w-full md:w-80 h-1/3 md:h-full overflow-y-auto bg-white border-t md:border-t-0 md:border-l border-white/10"
-              style={{ display: 'block', zIndex: 100, position: 'relative' }}
-            />
-          </>
-        )}
+          
+          <div 
+            ref={panelRef} 
+            className="flex-1 overflow-y-auto px-4 md:px-6 pb-4 md:pb-6 custom-scrollbar amap-dark-panel"
+            style={{ minHeight: '200px' }}
+          ></div>
+        </div>
       </div>
     </div>
   );

@@ -148,11 +148,11 @@ export default function App() {
 
   return (
     <div className="relative w-full h-screen bg-[#050505] text-white overflow-hidden font-sans">
-      <div className="absolute top-6 left-6 z-20 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/20 bg-white overflow-hidden">
+      <div className="absolute top-4 left-4 md:top-6 md:left-6 z-20 flex items-center gap-2 md:gap-3">
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/20 bg-white overflow-hidden shrink-0">
           <img src="/logo.png" alt="探宝 AI Logo" className="w-full h-full object-contain" />
         </div>
-        <h1 className="text-white font-medium tracking-wide text-lg drop-shadow-md">
+        <h1 className="text-white font-medium tracking-wide text-base md:text-lg drop-shadow-md whitespace-nowrap">
           探宝 AI
         </h1>
       </div>
@@ -164,8 +164,8 @@ export default function App() {
       </div>
 
       {/* Header Navigation */}
-      <header className="absolute top-0 left-0 right-0 z-20 p-6 flex justify-end items-center pointer-events-none">
-        <nav className="flex gap-4 pointer-events-auto">
+      <header className="absolute top-0 right-0 z-20 p-4 md:p-6 flex justify-end items-center pointer-events-none w-full md:w-auto">
+        <nav className="flex gap-2 md:gap-4 pointer-events-auto items-center mt-12 md:mt-0 overflow-x-auto pb-2 md:pb-0 px-4 md:px-0 scrollbar-hide max-w-full">
           {user ? (
             <div className="relative" ref={userMenuRef}>
               <div 
@@ -250,35 +250,35 @@ export default function App() {
 
           <button
             onClick={() => setView('home')}
-            className={`p-3 rounded-full backdrop-blur-md transition-all ${
+            className={`p-2.5 md:p-3 rounded-full backdrop-blur-md transition-all shrink-0 ${
               view === 'home' ? 'bg-white/20 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
             }`}
           >
-            <Mic size={20} />
+            <Mic size={18} className="md:w-5 md:h-5" />
           </button>
           <button
             onClick={() => setView('history')}
-            className={`p-3 rounded-full backdrop-blur-md transition-all ${
+            className={`p-2.5 md:p-3 rounded-full backdrop-blur-md transition-all shrink-0 ${
               view === 'history' ? 'bg-white/20 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
             }`}
           >
-            <Clock size={20} />
+            <Clock size={18} className="md:w-5 md:h-5" />
           </button>
           <button
             onClick={() => setView('map')}
-            className={`p-3 rounded-full backdrop-blur-md transition-all ${
+            className={`p-2.5 md:p-3 rounded-full backdrop-blur-md transition-all shrink-0 ${
               view === 'map' ? 'bg-white/20 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
             }`}
           >
-            <MapIcon size={20} />
+            <MapIcon size={18} className="md:w-5 md:h-5" />
           </button>
           <button
             onClick={() => setView('itinerary')}
-            className={`p-3 rounded-full backdrop-blur-md transition-all ${
+            className={`p-2.5 md:p-3 rounded-full backdrop-blur-md transition-all shrink-0 ${
               view === 'itinerary' ? 'bg-white/20 text-white' : 'bg-white/5 text-white/50 hover:bg-white/10'
             }`}
           >
-            <ListTodo size={20} />
+            <ListTodo size={18} className="md:w-5 md:h-5" />
           </button>
         </nav>
       </header>

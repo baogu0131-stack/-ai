@@ -102,16 +102,16 @@ export function VoiceAgent({ onNavigateToMap, onNavigateToItinerary }: VoiceAgen
       </AnimatePresence>
 
       {/* Subtitles Display */}
-      <div className="absolute bottom-80 left-0 right-0 flex flex-col items-center justify-end px-6 pointer-events-none z-10">
+      <div className="absolute bottom-[260px] md:bottom-80 left-0 right-0 flex flex-col items-center justify-end px-4 md:px-6 pointer-events-none z-10">
         <AnimatePresence>
           {(aiText || status === '思考中...') && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="px-6 py-3 max-w-3xl mx-auto pointer-events-auto"
+              className="px-4 md:px-6 py-3 max-w-3xl mx-auto pointer-events-auto"
             >
-              <div className="text-xl md:text-3xl font-medium text-center leading-relaxed text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] flex items-center justify-center flex-wrap gap-1">
+              <div className="text-lg md:text-3xl font-medium text-center leading-relaxed text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] flex items-center justify-center flex-wrap gap-1">
                 {aiText && <span>{aiText}</span>}
                 {status === '思考中...' && (
                   <span className="inline-flex gap-1.5 items-center ml-2 h-full py-2">
@@ -138,8 +138,8 @@ export function VoiceAgent({ onNavigateToMap, onNavigateToItinerary }: VoiceAgen
       </div>
 
       {/* Controls */}
-      <div className="flex flex-col items-center gap-6 mt-8 w-full max-w-md z-20">
-        <div className="text-sm tracking-widest uppercase text-white/50 font-medium">
+      <div className="flex flex-col items-center gap-4 md:gap-6 mt-4 md:mt-8 w-full max-w-[90%] md:max-w-md z-20">
+        <div className="text-xs md:text-sm tracking-widest uppercase text-white/50 font-medium">
           {status}
         </div>
         
@@ -165,22 +165,22 @@ export function VoiceAgent({ onNavigateToMap, onNavigateToItinerary }: VoiceAgen
           </div>
 
           {/* Input Area */}
-          <div className="flex items-center w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-full p-2 shadow-2xl">
-            <form onSubmit={handleSendText} className="flex-1 flex items-center px-4 py-1">
-              <Search size={18} className="text-white/30 mr-2 shrink-0" />
+          <div className="flex items-center w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-full p-1.5 md:p-2 shadow-2xl">
+            <form onSubmit={handleSendText} className="flex-1 flex items-center px-3 md:px-4 py-1">
+              <Search size={18} className="text-white/30 mr-2 shrink-0 hidden md:block" />
               <input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                placeholder={isItineraryMode ? "输入你想去哪里玩..." : "输入文字搜索地点或聊天..."}
-                className="w-full bg-transparent text-white placeholder-white/30 focus:outline-none text-base py-2"
+                placeholder={isItineraryMode ? "想去哪玩..." : "搜索地点或聊天..."}
+                className="w-full bg-transparent text-white placeholder-white/30 focus:outline-none text-sm md:text-base py-1 md:py-2"
               />
               <button
                 type="submit"
                 disabled={!inputText.trim()}
-                className="ml-2 p-2 bg-blue-500/80 rounded-full text-white hover:bg-blue-500 disabled:opacity-30 disabled:bg-white/10 transition-colors"
+                className="ml-1 md:ml-2 p-1.5 md:p-2 bg-blue-500/80 rounded-full text-white hover:bg-blue-500 disabled:opacity-30 disabled:bg-white/10 transition-colors shrink-0"
               >
-                <Send size={18} />
+                <Send size={16} className="md:w-[18px] md:h-[18px]" />
               </button>
             </form>
           </div>

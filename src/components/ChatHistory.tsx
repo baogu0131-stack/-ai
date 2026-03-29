@@ -47,10 +47,10 @@ export function ChatHistory({ onNavigateToItinerary }: ChatHistoryProps) {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
           <h2 className="text-3xl font-light text-white/90 tracking-tight">历史记录</h2>
           
-          <div className="flex items-center bg-white/5 rounded-full p-1 border border-white/10">
+          <div className="flex items-center bg-white/5 rounded-full p-1 border border-white/10 w-full md:w-auto overflow-x-auto scrollbar-hide shrink-0">
             <button
               onClick={() => setActiveTab('chat')}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === 'chat' ? 'bg-white/20 text-white shadow-md' : 'text-white/50 hover:text-white/80'
               }`}
             >
@@ -58,7 +58,7 @@ export function ChatHistory({ onNavigateToItinerary }: ChatHistoryProps) {
             </button>
             <button
               onClick={() => setActiveTab('search')}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === 'search' ? 'bg-white/20 text-white shadow-md' : 'text-white/50 hover:text-white/80'
               }`}
             >
@@ -66,7 +66,7 @@ export function ChatHistory({ onNavigateToItinerary }: ChatHistoryProps) {
             </button>
             <button
               onClick={() => setActiveTab('itinerary')}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 md:px-6 py-2 rounded-full text-xs md:text-sm font-medium transition-all whitespace-nowrap ${
                 activeTab === 'itinerary' ? 'bg-white/20 text-white shadow-md' : 'text-white/50 hover:text-white/80'
               }`}
             >
