@@ -30,23 +30,6 @@ export function VoiceAgent({ onNavigateToMap, onNavigateToItinerary }: VoiceAgen
 
   const stopAll = () => {
     setStatus('输入文字开始');
-    window.speechSynthesis.cancel();
-  };
-
-  const speakText = (text: string) => {
-    // 保持语音播报功能（AI回复的声音），只是去掉了用户的语音输入
-    if ('speechSynthesis' in window) {
-      const cleanText = text.replace(/<[^>]*>?/gm, '');
-      if (!cleanText) return;
-      
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.lang = 'zh-CN';
-      const voices = window.speechSynthesis.getVoices();
-      const zhVoice = voices.find(v => v.lang.includes('zh') || v.lang.includes('cmn'));
-      if (zhVoice) utterance.voice = zhVoice;
-      
-      window.speechSynthesis.speak(utterance);
-    }
   };
 
   const handleTextSubmit = async (textToSend: string) => {
@@ -83,7 +66,6 @@ export function VoiceAgent({ onNavigateToMap, onNavigateToItinerary }: VoiceAgen
       
       addMessageToHistory('ai', fullResponse);
       setStatus('输入文字开始');
-      speakText(fullResponse);
 
       // 如果调用了行程规划，等待语音播报开始后，自动跳转到行程界面
       if (isItineraryCalled && itineraryDataObj && onNavigateToItinerary) {
