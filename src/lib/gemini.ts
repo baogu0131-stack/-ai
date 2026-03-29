@@ -77,7 +77,7 @@ export const sendTextMessage = async (
   isItineraryMode: boolean = false
 ) => {
   const openai = new OpenAI({
-    apiKey: process.env.QWEN_API_KEY,
+    apiKey: import.meta.env.VITE_QWEN_API_KEY,
     baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
     dangerouslyAllowBrowser: true, // 允许在浏览器端直接调用
   });
