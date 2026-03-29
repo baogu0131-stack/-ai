@@ -1,0 +1,5 @@
+{
+  "name": "Aura Voice Agent",
+  "description": "An interactive 3D voice agent with daily chat history.",
+  "requestFramePermissions": ["microphone"]
+}

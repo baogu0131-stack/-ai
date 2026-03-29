@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  background-color: #050505;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 高德地图面板样式覆盖，确保在暗色背景下可见 */
+/* 全局重置高德地图内所有文字颜色，防止被 tailwind/body 的颜色影响 */
+.amap_lib_placeSearch * {
+  color: #333 !important;
+}
+
+.amap_lib_placeSearch {
+  background-color: #fff !important;
+  border: none !important;
+}
+
+.amap_lib_placeSearch_page {
+  background-color: #fff !important;
+}
+
+.amap_lib_placeSearch .poibox {
+  border-bottom: 1px solid #eee !important;
+  background-color: #fff !important;
+}
+
+.amap_lib_placeSearch .poibox:hover,
+.amap_lib_placeSearch .poibox.active {
+  background-color: #f5f5f5 !important;
+}
+
+/* 修复信息窗体（气泡）不显示的问题 */
+.amap-info-contentContainer,
+.amap-info-contentContainer * {
+  color: #333 !important;
+}
+
+.amap-info-content {
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+  padding: 12px !important;
+  border: 1px solid #ddd !important;
+}
+
+.amap-info-window {
+  background-color: transparent !important;
+}
+
+/* 确保信息窗体的关闭按钮可见 */
+.amap-info-close {
+  color: #999 !important;
+  font-size: 16px !important;
+  right: 8px !important;
+  top: 8px !important;
+}
+
+.amap-info-close:hover {
+  color: #333 !important;
+}
